@@ -1,0 +1,19 @@
+{
+  "name": "yt_websockets-crash-course-sports-broadcast-engine",
+  "module": "server.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "bun --watch server.ts "
+  },
+  "devDependencies": {
+    "@types/ws": "^8.18.1",
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "ws": "^8.19.0"
+  }
+}
