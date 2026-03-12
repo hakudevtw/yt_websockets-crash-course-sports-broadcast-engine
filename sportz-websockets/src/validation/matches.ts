@@ -7,15 +7,15 @@ export const MATCH_STATUS = {
 } as const;
 export type MatchStatus = (typeof MATCH_STATUS)[keyof typeof MATCH_STATUS];
 
-export const listMatchesQuerySchema = z.object({
+export const ListMatchesQuerySchema = z.object({
   limit: z.coerce.number().int().positive().max(100).optional(),
 });
 
-export const matchIdParamSchema = z.object({
+export const MatchIdParamSchema = z.object({
   id: z.coerce.number().int().positive(),
 });
 
-export const createMatchSchema = z
+export const CreateMatchSchema = z
   .object({
     sport: z.string().min(1, "sport must be non-empty"),
     homeTeam: z.string().min(1, "homeTeam must be non-empty"),
@@ -37,7 +37,7 @@ export const createMatchSchema = z
     }
   });
 
-export const updateScoreSchema = z.object({
+export const UpdateScoreSchema = z.object({
   homeScore: z.coerce.number().int().nonnegative(),
   awayScore: z.coerce.number().int().nonnegative(),
 });
