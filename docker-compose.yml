@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: sportz-websockets-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: sportz
+      POSTGRES_PASSWORD: sportz
+      POSTGRES_DB: sportz_websockets
+    ports:
+      - "5432:5432"
+    volumes:
+      - sportz_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sportz -d sportz_websockets"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  sportz_postgres_data:
