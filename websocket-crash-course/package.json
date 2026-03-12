@@ -1,5 +1,5 @@
 {
-  "name": "yt_websockets-crash-course-sports-broadcast-engine",
+  "name": "websocket-crash-course",
   "module": "server.ts",
   "type": "module",
   "private": true,
