@@ -18,6 +18,7 @@ export function attachWebSocketServer(server: Server) {
   const wss = new WebSocketServer({ server, path: "/ws", maxPayload: 1024 * 1024 * 10 });
 
   wss.on("connection", (socket: WebSocket & { isAlive?: boolean }) => {
+    // Matches the approach in the ws readme
     socket.isAlive = true;
     socket.on("pong", () => {
       socket.isAlive = true;
@@ -30,6 +31,8 @@ export function attachWebSocketServer(server: Server) {
 
   const interval = setInterval(() => {
     wss.clients.forEach((socket: WebSocket & { isAlive?: boolean }) => {
+      // When ping was sent and no pong was received,
+      // the client is considered dead
       if (socket.isAlive === false) return socket.terminate();
       socket.isAlive = false;
       socket.ping();

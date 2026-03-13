@@ -4,7 +4,6 @@ import { db } from "../db/db";
 import { matches } from "../db/schema";
 import { getMatchStatus } from "../utils/match-status";
 import { desc } from "drizzle-orm";
-import { z } from "zod";
 
 const MAX_LIMIT = 100;
 
@@ -12,14 +11,13 @@ export const matchesRouter = Router();
 
 matchesRouter.get("/", async (req, res) => {
   const parsed = ListMatchesQuerySchema.safeParse(req.body);
-  console.log(parsed);
+
   if (!parsed.success) {
     return res.status(400).json({ error: "Invalid query.", details: parsed.error.issues });
   }
 
-  const limit = Math.min(parsed.data.limit ?? 50, MAX_LIMIT);
-
   try {
+    const limit = Math.min(parsed.data.limit ?? 50, MAX_LIMIT);
     const data = await db.select().from(matches).orderBy(desc(matches.createdAt)).limit(limit);
     return res.status(200).json({ data });
   } catch (e) {
