@@ -21,6 +21,8 @@
     "typescript": "^5"
   },
   "dependencies": {
+    "@arcjet/bun": "^1.3.0",
+    "@arcjet/inspect": "^1.3.0",
     "dotenv": "^17.3.1",
     "drizzle-orm": "^0.45.1",
     "express": "^5.2.1",

@@ -2,6 +2,7 @@ import express from "express";
 import { attachWebSocketServer } from "./ws/server";
 import { matchesRouter } from "./routes/matches";
 import http from "http";
+// import { securityMiddleware } from "./arcjet";
 
 const PORT = Number(process.env.PORT ?? 8000);
 const HOST = process.env.HOST ?? "0.0.0.0";
@@ -14,8 +15,8 @@ const app = express();
 const server = http.createServer(app);
 
 app.use(express.json());
-
 app.use("/matches", matchesRouter);
+// app.use(securityMiddleware);
 
 // WebSocket connections start as an HTTP request with Upgrade:websocket header
 // The WebSocket server must be attached to the same server that receives that request so it can handle the upgrade and then take over the connection.
