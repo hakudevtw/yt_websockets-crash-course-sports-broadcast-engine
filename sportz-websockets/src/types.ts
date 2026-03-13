@@ -12,3 +12,15 @@ export type Match = {
   awayScore: number;
   createdAt: Date;
 };
+
+export type Commentary = {
+  id: number;
+  matchId: number;
+  minute: number;
+  sequence: number;
+  period: string;
+  eventType: string;
+  actor: string;
+  team: string;
+  message: string;
+};

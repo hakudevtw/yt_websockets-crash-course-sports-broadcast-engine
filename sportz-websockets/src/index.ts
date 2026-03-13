@@ -1,6 +1,7 @@
 import express from "express";
 import { attachWebSocketServer } from "./ws/server";
 import { matchesRouter } from "./routes/matches";
+import { commentaryRoutes } from "./routes/commentary";
 import http from "http";
 // import { securityMiddleware } from "./arcjet";
 
@@ -16,12 +17,14 @@ const server = http.createServer(app);
 
 app.use(express.json());
 app.use("/matches", matchesRouter);
+app.use("/matches/:id/commentary", commentaryRoutes);
 // app.use(securityMiddleware);
 
 // WebSocket connections start as an HTTP request with Upgrade:websocket header
 // The WebSocket server must be attached to the same server that receives that request so it can handle the upgrade and then take over the connection.
-const { broadcastMatchCreated } = attachWebSocketServer(server);
+const { broadcastMatchCreated, broadcastCommentary } = attachWebSocketServer(server);
 app.locals.broadcastMatchCreated = broadcastMatchCreated;
+app.locals.broadcastCommentary = broadcastCommentary;
 
 server.listen(PORT, HOST, () => {
   const baseUrl = HOST === "0.0.0.0" ? `http://localhost:${PORT}` : `http://${HOST}:${PORT}`;

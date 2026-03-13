@@ -1,21 +1,9 @@
-import {
-  pgTable,
-  serial,
-  text,
-  integer,
-  timestamp,
-  jsonb,
-  pgEnum,
-} from "drizzle-orm/pg-core";
+import { pgTable, serial, text, integer, timestamp, jsonb, pgEnum } from "drizzle-orm/pg-core";
 
 /**
  * Match lifecycle status.
  */
-export const matchStatusEnum = pgEnum("match_status", [
-  "scheduled",
-  "live",
-  "finished",
-]);
+export const matchStatusEnum = pgEnum("match_status", ["scheduled", "live", "finished"]);
 
 /**
  * Matches table: one row per scheduled/live/finished match.
